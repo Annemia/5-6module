@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3c00732921604ba2bc3c8c1c849c1b78" Name="Diagram1">
+        <EntityTypeShape EntityType="BuildingBaseModel.BatchesMaterial" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.Clients" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.Comments" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.Contracts" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.DifferentServices" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.Materials" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.Objects" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.Stages" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.TechControl" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuildingBaseModel.TechControlStatus" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BuildingBaseModel.FK_BatchesMaterial_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_BatchesMaterial_Objects" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_Comments_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_Contracts_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_Objects_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_Comments_Objects" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_Contracts_Objects" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_DifferentServices_Contracts" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_Objects_Stages" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_TechControl_Objects" ManuallyRouted="false" />
+        <AssociationConnector Association="BuildingBaseModel.FK_TechControl_TechControlStatus" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

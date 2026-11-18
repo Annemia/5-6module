@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище BuildingBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BatchesMaterial">
+    <Key>
+      <PropertyRef Name="ID_Batch" />
+    </Key>
+    <Property Name="ID_Batch" Type="int" Nullable="false" />
+    <Property Name="ID_Object" Type="int" />
+    <Property Name="ID_Material" Type="int" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DelivaryDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="ID_Clients" />
+    </Key>
+    <Property Name="ID_Clients" Type="int" Nullable="false" />
+    <Property Name="surname" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="otchestvo" Type="varchar" MaxLength="50" />
+    <Property Name="phone_number" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="login" Type="nvarchar" MaxLength="10" />
+    <Property Name="password" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="ID_Comment" />
+    </Key>
+    <Property Name="ID_Comment" Type="int" Nullable="false" />
+    <Property Name="ID_Client" Type="int" />
+    <Property Name="ID_Object" Type="int" />
+    <Property Name="CommentText" Type="text" />
+    <Property Name="CommentDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Contracts">
+    <Key>
+      <PropertyRef Name="ID_Contract" />
+    </Key>
+    <Property Name="ID_Contract" Type="int" Nullable="false" />
+    <Property Name="ID_Client" Type="int" />
+    <Property Name="ID_Object" Type="int" />
+    <Property Name="ContractDate" Type="date" />
+    <Property Name="sum" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="DifferentServices">
+    <Key>
+      <PropertyRef Name="ID_Service" />
+    </Key>
+    <Property Name="ID_Service" Type="int" Nullable="false" />
+    <Property Name="ID_Contract" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Materials">
+    <Key>
+      <PropertyRef Name="ID_Material" />
+    </Key>
+    <Property Name="ID_Material" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="unit" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Objects">
+    <Key>
+      <PropertyRef Name="ID_Object" />
+    </Key>
+    <Property Name="ID_Object" Type="int" Nullable="false" />
+    <Property Name="ID_Client" Type="int" />
+    <Property Name="ID_Stage" Type="int" />
+    <Property Name="Addres" Type="varchar" MaxLength="50" />
+    <Property Name="DesignDetails" Type="text" />
+    <Property Name="Smeta" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="sketch" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Stages">
+    <Key>
+      <PropertyRef Name="ID_Stage" />
+    </Key>
+    <Property Name="ID_Stage" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TechControl">
+    <Key>
+      <PropertyRef Name="ID_Control" />
+    </Key>
+    <Property Name="ID_Control" Type="int" Nullable="false" />
+    <Property Name="ID_Object" Type="int" />
+    <Property Name="ID_Status" Type="int" />
+    <Property Name="surnameInspector" Type="varchar" MaxLength="50" />
+    <Property Name="nameInspector" Type="varchar" MaxLength="50" />
+    <Property Name="ControlDate" Type="date" />
+  </EntityType>
+  <EntityType Name="TechControlStatus">
+    <Key>
+      <PropertyRef Name="ID_Status" />
+    </Key>
+    <Property Name="ID_Status" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_BatchesMaterial_Materials">
+    <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+    <End Role="BatchesMaterial" Type="Self.BatchesMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materials">
+        <PropertyRef Name="ID_Material" />
+      </Principal>
+      <Dependent Role="BatchesMaterial">
+        <PropertyRef Name="ID_Material" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatchesMaterial_Objects">
+    <End Role="Objects" Type="Self.Objects" Multiplicity="0..1" />
+    <End Role="BatchesMaterial" Type="Self.BatchesMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objects">
+        <PropertyRef Name="ID_Object" />
+      </Principal>
+      <Dependent Role="BatchesMaterial">
+        <PropertyRef Name="ID_Object" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Clients">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ID_Clients" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="ID_Client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Objects">
+    <End Role="Objects" Type="Self.Objects" Multiplicity="0..1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objects">
+        <PropertyRef Name="ID_Object" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="ID_Object" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contracts_Clients">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+    <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ID_Clients" />
+      </Principal>
+      <Dependent Role="Contracts">
+        <PropertyRef Name="ID_Client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contracts_Objects">
+    <End Role="Objects" Type="Self.Objects" Multiplicity="0..1" />
+    <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objects">
+        <PropertyRef Name="ID_Object" />
+      </Principal>
+      <Dependent Role="Contracts">
+        <PropertyRef Name="ID_Object" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DifferentServices_Contracts">
+    <End Role="Contracts" Type="Self.Contracts" Multiplicity="0..1" />
+    <End Role="DifferentServices" Type="Self.DifferentServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contracts">
+        <PropertyRef Name="ID_Contract" />
+      </Principal>
+      <Dependent Role="DifferentServices">
+        <PropertyRef Name="ID_Contract" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Objects_Clients">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+    <End Role="Objects" Type="Self.Objects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ID_Clients" />
+      </Principal>
+      <Dependent Role="Objects">
+        <PropertyRef Name="ID_Client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Objects_Stages">
+    <End Role="Stages" Type="Self.Stages" Multiplicity="0..1" />
+    <End Role="Objects" Type="Self.Objects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stages">
+        <PropertyRef Name="ID_Stage" />
+      </Principal>
+      <Dependent Role="Objects">
+        <PropertyRef Name="ID_Stage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TechControl_Objects">
+    <End Role="Objects" Type="Self.Objects" Multiplicity="0..1" />
+    <End Role="TechControl" Type="Self.TechControl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objects">
+        <PropertyRef Name="ID_Object" />
+      </Principal>
+      <Dependent Role="TechControl">
+        <PropertyRef Name="ID_Object" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TechControl_TechControlStatus">
+    <End Role="TechControlStatus" Type="Self.TechControlStatus" Multiplicity="0..1" />
+    <End Role="TechControl" Type="Self.TechControl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TechControlStatus">
+        <PropertyRef Name="ID_Status" />
+      </Principal>
+      <Dependent Role="TechControl">
+        <PropertyRef Name="ID_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище BuildingBaseModelContainer">
+    <EntitySet Name="BatchesMaterial" EntityType="Self.BatchesMaterial" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DifferentServices" EntityType="Self.DifferentServices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Objects" EntityType="Self.Objects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stages" EntityType="Self.Stages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TechControl" EntityType="Self.TechControl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TechControlStatus" EntityType="Self.TechControlStatus" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BatchesMaterial_Materials" Association="Self.FK_BatchesMaterial_Materials">
+      <End Role="Materials" EntitySet="Materials" />
+      <End Role="BatchesMaterial" EntitySet="BatchesMaterial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatchesMaterial_Objects" Association="Self.FK_BatchesMaterial_Objects">
+      <End Role="Objects" EntitySet="Objects" />
+      <End Role="BatchesMaterial" EntitySet="BatchesMaterial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Clients" Association="Self.FK_Comments_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Objects" Association="Self.FK_Comments_Objects">
+      <End Role="Objects" EntitySet="Objects" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contracts_Clients" Association="Self.FK_Contracts_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Contracts" EntitySet="Contracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contracts_Objects" Association="Self.FK_Contracts_Objects">
+      <End Role="Objects" EntitySet="Objects" />
+      <End Role="Contracts" EntitySet="Contracts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DifferentServices_Contracts" Association="Self.FK_DifferentServices_Contracts">
+      <End Role="Contracts" EntitySet="Contracts" />
+      <End Role="DifferentServices" EntitySet="DifferentServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Objects_Clients" Association="Self.FK_Objects_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Objects" EntitySet="Objects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Objects_Stages" Association="Self.FK_Objects_Stages">
+      <End Role="Stages" EntitySet="Stages" />
+      <End Role="Objects" EntitySet="Objects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TechControl_Objects" Association="Self.FK_TechControl_Objects">
+      <End Role="Objects" EntitySet="Objects" />
+      <End Role="TechControl" EntitySet="TechControl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TechControl_TechControlStatus" Association="Self.FK_TechControl_TechControlStatus">
+      <End Role="TechControlStatus" EntitySet="TechControlStatus" />
+      <End Role="TechControl" EntitySet="TechControl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
